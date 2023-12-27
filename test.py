@@ -1,6 +1,11 @@
+import pickle
+from func import test
+with open("q_values", "rb") as f:
+  q_values = pickle.load(f)
+
+
 import numpy as np
 import gym
-from func import train
 import gym
 import gym_ple
 from gym_ple import PLEEnv
@@ -56,18 +61,20 @@ class FlappyBirdCustom(gym.Wrapper):
       return custom_state
 env = FlappyBirdCustom(gym.make('FlappyBird-v0'), rounding = 10)
 env.reset()
-# define action constant
-ACTION_FLAP = 0
-ACTION_STAY = 1
-from collections import defaultdict
 
-q_values = defaultdict(float)
-steps = train(q_values, episodes=500, epsilon_min=.001, epsilon_decay_rate=.99, env=env, max_steps=1000,gamma=1, alpha=.9)
+history = test(q_values, 4,env)
 
 
+import matplotlib.animation as anim
+from IPython.display import HTML
+import matplotlib.pyplot as plt
+# clear_output
 
-import pickle
+frames = history[0]["frames"]
 
-with open("q_values", "wb") as f:
-  pickle.dump(q_values, f)
+import cv2
+for i in frames:
+    cv2.imshow("image",i)
+    cv2.waitKey(50)
+cv2.destroyAllWindows()
 
