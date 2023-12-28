@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 ACTION_FLAP=0
 ACTION_STAY=1
 
@@ -108,5 +109,10 @@ def test(q_values, episodes,env):
         history[i]={"score":score, "frames": frames}
         print(f'episodes {i} : score {score}')
         break
+
+    for i in frames:
+        cv2.imshow("image",i)
+        cv2.waitKey(50)
+    cv2.destroyAllWindows()
     
   return history

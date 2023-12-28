@@ -67,17 +67,7 @@ env = FlappyBirdCustom(gym.make('FlappyBird-v0'), rounding = 10)
 env.reset()
 
 epsilon_history = test(epsilon_q_values, 1,env)
-epsilon_frames=epsilon_history[0]["frames"]
 
-import cv2
-for i in epsilon_frames:
-    cv2.imshow("image",i)
-    cv2.waitKey(50)
-cv2.destroyAllWindows()
 
-new_frame=test(new_q_values, 1,env)[0]["frames"]
-for i in new_frame:
-    cv2.imshow("anh",i)
-    cv2.waitKey(50)
-cv2.destroyAllWindows()
+new_frame=test(new_q_values, 1,env)
 
