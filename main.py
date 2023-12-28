@@ -60,14 +60,14 @@ env.reset()
 ACTION_FLAP = 0
 ACTION_STAY = 1
 from collections import defaultdict
-
+counter=defaultdict(float)
 q_values = defaultdict(float)
-steps = train(q_values, episodes=500, epsilon_min=.001, epsilon_decay_rate=.99, env=env, max_steps=1000,gamma=1, alpha=.9)
+steps = train(q_values, episodes=500, env=env,counters=counter, max_steps=1000,gamma=1, alpha=.9)
 
 
 
 import pickle
 
-with open("q_values", "wb") as f:
+with open("new_q_values", "wb") as f:
   pickle.dump(q_values, f)
 

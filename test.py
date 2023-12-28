@@ -1,6 +1,6 @@
 import pickle
 from func import test
-with open("q_values", "rb") as f:
+with open("new_q_values", "rb") as f:
   q_values = pickle.load(f)
 
 

@@ -8,11 +8,14 @@ def get_optimal_action(q_values, state,env):
     return env.action_space.sample()
   return np.argmax(q)
 
-def epsilon_greedy(q_values, state, epsilon,env):
-  if np.random.rand()<epsilon:
-    return env.action_space.sample()
-  return get_optimal_action(q_values,state,env)
-
+def greedy(q_values, state,counters,env):
+  if counters[(state,ACTION_FLAP)]==3 and counters[(state,ACTION_STAY)]==3:
+    return get_optimal_action(q_values,state,env)
+  if counters[(state,ACTION_FLAP)]>=counters[(state,ACTION_STAY)]:
+    counters[(state,ACTION_STAY)]+=1
+    return ACTION_STAY
+  counters[(state,ACTION_FLAP)]+=1
+  return ACTION_FLAP
 def update_q(q_values, state, action, next_state, reward, alpha, gamma):
 
   Q =q_values[(state,action)]
@@ -21,17 +24,16 @@ def update_q(q_values, state, action, next_state, reward, alpha, gamma):
   q_values[(state,action)]=Q + alpha*(reward + gamma*q_max - Q)
 
 
-def train(q_values, episodes, epsilon_min, epsilon_decay_rate,env, max_steps=1000, gamma=1, alpha=.9):
+def train(q_values, episodes,env,counters, max_steps=1000, gamma=1, alpha=.9):
   steps = []
   pipes = []
-  epsilon = 1
   for i in range(episodes):
     env.reset()
     state = env.get_custom_state()
     step=0
     pipe=0
     while True:
-      action = epsilon_greedy(q_values, state, epsilon,env)
+      action = greedy(q_values, state, counters,env)
       next_state, reward, terminal = env.step(action)
       update_q(q_values, state, action, next_state, reward, alpha, gamma)
       state=next_state
@@ -42,11 +44,9 @@ def train(q_values, episodes, epsilon_min, epsilon_decay_rate,env, max_steps=100
         break
     steps.append(step)
     pipes.append(pipe)
-    if epsilon>epsilon_min:
-      epsilon *=epsilon_decay_rate
 
     if (i+1)%100==0:
-      print(f' episodes  {i+1} - epsilon {epsilon}')
+      print(f' episodes  {i+1}')
       print(f' step   :     {np.mean(step)}')
       print(f' pipe   :    {np.mean(pipe)}')
 
