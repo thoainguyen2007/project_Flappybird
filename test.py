@@ -1,8 +1,11 @@
 
 import pickle
 from func import test
+with open("epsilon_q_values", "rb") as f:
+  epsilon_q_values = pickle.load(f)
+
 with open("new_q_values", "rb") as f:
-  q_values = pickle.load(f)
+  new_q_values = pickle.load(f)
 
 
 import numpy as np
@@ -63,19 +66,18 @@ class FlappyBirdCustom(gym.Wrapper):
 env = FlappyBirdCustom(gym.make('FlappyBird-v0'), rounding = 10)
 env.reset()
 
-history = test(q_values, 4,env)
-
-
-import matplotlib.animation as anim
-from IPython.display import HTML
-import matplotlib.pyplot as plt
-# clear_output
-
-frames = history[0]["frames"]
+epsilon_history = test(epsilon_q_values, 1,env)
+epsilon_frames=epsilon_history[0]["frames"]
 
 import cv2
-for i in frames:
+for i in epsilon_frames:
     cv2.imshow("image",i)
+    cv2.waitKey(50)
+cv2.destroyAllWindows()
+
+new_frame=test(new_q_values, 1,env)[0]["frames"]
+for i in new_frame:
+    cv2.imshow("anh",i)
     cv2.waitKey(50)
 cv2.destroyAllWindows()
 
