@@ -3,7 +3,6 @@ from tensorflow.keras.layers import Dense
 import numpy as np
 from func import visualize
 
-
 def create_model(env):
     model = Sequential()
     model.add(Dense(64, activation='relu', input_shape=(np.array(env.get_custom_state()).shape)))
