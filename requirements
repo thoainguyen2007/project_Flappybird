@@ -1,0 +1,8 @@
+tensorflow
+numpy
+gym
+matplotlib
+pickle
+cv2
+warnings
+collections
