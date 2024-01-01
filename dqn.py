@@ -1,7 +1,8 @@
 import gym
 import pickle
-from func import FlappyBirdCustom
 from dqn_func import create_model, dqn_train
+from func import FlappyBirdCustom
+
 
 env = FlappyBirdCustom(gym.make('FlappyBird-v0'), rounding = 10)
 env.reset()
