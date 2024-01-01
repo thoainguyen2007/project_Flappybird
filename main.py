@@ -7,14 +7,14 @@ env = FlappyBirdCustom(gym.make('FlappyBird-v0'), rounding = 10)
 env.reset()
 
 
-###Train with epsilon_greedy
-epsilon_q_values = defaultdict(float)
-steps = epsilon_train(epsilon_q_values, epsilon=1, episodes=500,epsilon_min=.001, epsilon_decay_rate=.99, env=env, max_steps=1000,gamma=1, alpha=.9)
+###Train and save with epsilon_greedy
+# epsilon_q_values = defaultdict(float)
+# steps = epsilon_train(epsilon_q_values, epsilon=1, episodes=500,epsilon_min=.001, epsilon_decay_rate=.99, env=env, max_steps=1000,gamma=1, alpha=.9)
 
-with open("epsilon_q_values", "wb") as f:
-  pickle.dump(epsilon_q_values, f)
+# with open("epsilon_q_values", "wb") as f:
+#   pickle.dump(epsilon_q_values, f)
 
-###Train with new_greedy
+###Train and save with new_greedy
 counter=defaultdict(float)
 new_q_values = defaultdict(float)
 step=new_train(new_q_values, episodes=500,env=env,counters=counter, max_steps=1000, gamma=1, alpha=.9)

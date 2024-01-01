@@ -116,7 +116,7 @@ def epsilon_train(q_values, episodes,epsilon,epsilon_min, epsilon_decay_rate,env
       print(f' step   :     {np.mean(step)}')
       print(f' pipe   :    {np.mean(pipe)}')
 
-  return steps
+  visualize(steps, pipes)
 
 
 def new_train(q_values, episodes,env,counters, max_steps=1000, gamma=1, alpha=.9):
@@ -145,7 +145,7 @@ def new_train(q_values, episodes,env,counters, max_steps=1000, gamma=1, alpha=.9
       print(f' step   :     {np.mean(step)}')
       print(f' pipe   :    {np.mean(pipe)}')
 
-  return steps
+  visualize(steps, pipes)
 
 
 
