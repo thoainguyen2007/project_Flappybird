@@ -1,5 +1,5 @@
 import gym
-from func import epsilon_train ,new_train, FlappyBirdCustom
+from qlearning_func import epsilon_train ,new_train, FlappyBirdCustom
 from collections import defaultdict
 import pickle
 

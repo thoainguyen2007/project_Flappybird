@@ -1,6 +1,6 @@
 import pickle
 import gym
-from func import FlappyBirdCustom, test
+from qlearning_func import FlappyBirdCustom, test
 from dqn_func import dqn_test
 
 env = FlappyBirdCustom(gym.make('FlappyBird-v0'), rounding = 10)
@@ -18,7 +18,7 @@ env.reset()
 # new_history=test(new_q_values, 1,env)
 
 
-with open("dqn", "rb") as f:
+with open("dqn_model", "rb") as f:
   dqn = pickle.load(f)
 dqn_history=dqn_test(dqn, 1, env)
 

@@ -1,7 +1,7 @@
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 import numpy as np
-from func import visualize
+from qlearning_func import visualize
 
 def create_model(env):
     model = Sequential()
