@@ -172,10 +172,10 @@ def test(q_values, episodes,env):
         print(f'episodes {i} : score {score}')
         break
 
-    for i in frames:
-        cv2.imshow("image",i)
-        cv2.waitKey(50)
-    cv2.destroyAllWindows()
+    # for i in frames:
+    #     cv2.imshow("image",i)
+    #     cv2.waitKey(50)
+    # cv2.destroyAllWindows()
     
   return history
 
@@ -188,8 +188,8 @@ def visualize(steps_,pipes_):
 
   plt.subplot(1,2,1)
   plt.title("Số step từng episode")
-  plt.xlabel("Step")
-  plt.ylabel("y1")
+  plt.xlabel("Episode")
+  plt.ylabel("Step")
   plt.plot(k,steps_)
 
   plt.subplot(1,2,2)
