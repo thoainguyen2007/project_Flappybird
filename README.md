@@ -8,4 +8,3 @@ Trong phần Q-learning, ta sẽ thử nghiệm bằng hàm epsilon_greedy và h
    b. DQN: Chạy file dqn_main.py
 3. Test:
    Chạy file test.py (Nhớ chọn loại mô hình muốn chạy)
-Nếu không muốn train thì tải model/q-table có sẵn về và chạy file test.py
